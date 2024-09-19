@@ -22,8 +22,12 @@ export default {
     'It appears that the content submitted has been flagged by our moderation system for not aligning with our community guidelines. We\'re unable to proceed with this specific topic. If you have any other questions or topics you\'d like to explore, please edit your message, or create a new conversation.',
   com_error_no_user_key: 'No key found. Please provide a key and try again.',
   com_error_no_base_url: 'No base URL found. Please provide one and try again.',
-  com_error_invalid_request:
+  com_warning_resubmit_unsupported:
+    'Resubmitting the AI message is not supported for this endpoint.',
+  com_error_invalid_request_error:
     'The AI service rejected the request due to an error. This could be caused by an invalid API key or an improperly formatted request.',
+  com_error_no_system_messages:
+    'The selected AI service or model does not support system messages. Try using prompts instead of custom instructions.',
   com_error_invalid_user_key: 'Invalid key provided. Please provide a valid key and try again.',
   com_error_expired_user_key:
     'Provided key for {0} expired at {1}. Please provide a new key and try again.',
@@ -358,8 +362,10 @@ export default {
   com_ui_bookmarks_delete_error: 'There was an error deleting the bookmark',
   com_ui_bookmarks_add_to_conversation: 'Add to current conversation',
   com_ui_bookmarks_filter: 'Filter bookmarks...',
+  com_ui_bookmarks_delete: 'Delete Bookmark',
   com_ui_no_bookmarks: 'it seems like you have no bookmarks yet. Click on a chat and add a new one',
   com_ui_no_conversation_id: 'No conversation ID found',
+  com_ui_add_multi_conversation: 'Add multi-conversation',
   com_auth_error_login:
     'Unable to login with the information provided. Please check your credentials and try again.',
   com_auth_error_login_rl:
@@ -558,6 +564,7 @@ export default {
   com_endpoint_export: 'Export',
   com_endpoint_export_share: 'Export/Share',
   com_endpoint_assistant: 'Assistant',
+  com_endpoint_search: 'Search endpoint by name',
   com_endpoint_use_active_assistant: 'Use Active Assistant',
   com_endpoint_assistant_model: 'Assistant Model',
   com_endpoint_save_as_preset: 'Save As Preset',

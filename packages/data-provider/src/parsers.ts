@@ -13,13 +13,11 @@ import {
   gptPluginsSchema,
   // agentsSchema,
   compactAgentsSchema,
-  compactOpenAISchema,
   compactGoogleSchema,
   compactChatGPTSchema,
   chatGPTBrowserSchema,
   compactPluginsSchema,
   compactAssistantSchema,
-  compactAnthropicSchema,
 } from './schemas';
 import { bedrockInputSchema } from './bedrock';
 import { alternateName } from './config';
@@ -240,6 +238,8 @@ export const getResponseSender = (endpointOption: t.TEndpointOption): string => 
   ) {
     if (chatGptLabel) {
       return chatGptLabel;
+    } else if (model && /\bo1\b/i.test(model)) {
+      return 'o1';
     } else if (model && model.includes('gpt-3')) {
       return 'GPT-3.5';
     } else if (model && model.includes('gpt-4o')) {
@@ -300,20 +300,20 @@ export const getResponseSender = (endpointOption: t.TEndpointOption): string => 
 };
 
 type CompactEndpointSchema =
-  | typeof compactOpenAISchema
+  | typeof openAISchema
   | typeof compactAssistantSchema
   | typeof compactAgentsSchema
   | typeof compactGoogleSchema
   | typeof bingAISchema
-  | typeof compactAnthropicSchema
+  | typeof anthropicSchema
   | typeof compactChatGPTSchema
   | typeof bedrockInputSchema
   | typeof compactPluginsSchema;
 
 const compactEndpointSchemas: Record<string, CompactEndpointSchema> = {
-  [EModelEndpoint.openAI]: compactOpenAISchema,
-  [EModelEndpoint.azureOpenAI]: compactOpenAISchema,
-  [EModelEndpoint.custom]: compactOpenAISchema,
+  [EModelEndpoint.openAI]: openAISchema,
+  [EModelEndpoint.azureOpenAI]: openAISchema,
+  [EModelEndpoint.custom]: openAISchema,
   [EModelEndpoint.assistants]: compactAssistantSchema,
   [EModelEndpoint.azureAssistants]: compactAssistantSchema,
   [EModelEndpoint.agents]: compactAgentsSchema,
@@ -321,7 +321,7 @@ const compactEndpointSchemas: Record<string, CompactEndpointSchema> = {
   [EModelEndpoint.bedrock]: bedrockInputSchema,
   /* BingAI needs all fields */
   [EModelEndpoint.bingAI]: bingAISchema,
-  [EModelEndpoint.anthropic]: compactAnthropicSchema,
+  [EModelEndpoint.anthropic]: anthropicSchema,
   [EModelEndpoint.chatGPTBrowser]: compactChatGPTSchema,
   [EModelEndpoint.gptPlugins]: compactPluginsSchema,
 };

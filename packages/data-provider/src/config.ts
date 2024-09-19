@@ -11,6 +11,10 @@ export const defaultSocialLogins = ['google', 'facebook', 'openid', 'github', 'd
 
 export const defaultRetrievalModels = [
   'gpt-4o',
+  'o1-preview-2024-09-12',
+  'o1-preview',
+  'o1-mini-2024-09-12',
+  'o1-mini',
   'chatgpt-4o-latest',
   'gpt-4o-2024-05-13',
   'gpt-4o-2024-08-06',
@@ -617,8 +621,8 @@ export const bedrockModels = [
   'anthropic.claude-v2',
   'anthropic.claude-v2:1',
   'anthropic.claude-instant-v1',
-  'cohere.command-text-v14',
-  'cohere.command-light-text-v14',
+  // 'cohere.command-text-v14', // no conversation history
+  // 'cohere.command-light-text-v14', // no conversation history
   'cohere.command-r-v1:0',
   'cohere.command-r-plus-v1:0',
   'meta.llama2-13b-chat-v1',
@@ -712,11 +716,6 @@ export const modularEndpoints = new Set<EModelEndpoint | string>([
   EModelEndpoint.openAI,
   EModelEndpoint.azureOpenAI,
   EModelEndpoint.custom,
-  EModelEndpoint.agents,
-  EModelEndpoint.bedrock,
-]);
-
-export const paramEndpoints = new Set<EModelEndpoint | string>([
   EModelEndpoint.agents,
   EModelEndpoint.bedrock,
 ]);
@@ -951,6 +950,10 @@ export enum ErrorTypes {
    * Invalid request error, API rejected request
    */
   INVALID_REQUEST = 'invalid_request_error',
+  /**
+   * Invalid request error, API rejected request
+   */
+  NO_SYSTEM_MESSAGES = 'no_system_messages',
 }
 
 /**
@@ -1060,7 +1063,7 @@ export enum TTSProviders {
 /** Enum for app-wide constants */
 export enum Constants {
   /** Key for the app's version. */
-  VERSION = 'v0.7.5-rc1',
+  VERSION = 'v0.7.5-rc2',
   /** Key for the Custom Config's version (librechat.yaml). */
   CONFIG_VERSION = '1.1.7',
   /** Standard value for the first message's `parentMessageId` value, to indicate no parent exists. */
@@ -1107,7 +1110,7 @@ export enum LocalStorageKeys {
   /** Key for the last selected fork setting */
   FORK_SETTING = 'forkSetting',
   /** Key for remembering the last selected option, instead of manually selecting */
-  REMEMBER_FORK_OPTION = 'rememberForkOption',
+  REMEMBER_FORK_OPTION = 'rememberDefaultFork',
   /** Key for remembering the split at target fork option modifier */
   FORK_SPLIT_AT_TARGET = 'splitAtTarget',
   /** Key for saving text drafts */
